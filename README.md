@@ -1,4 +1,4 @@
-# Role Name
+# Redis
 
 This role installs and configures a redis server. It allows to set all configuration variables supported by redis.
 

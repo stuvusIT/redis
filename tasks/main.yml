@@ -3,10 +3,17 @@
   apt:
     update_chache: yes
   changed_when: false
+  when: ansible_pkg_mgr == "apt"
 
 - name: Install redis-server
   apt:
     name: redis-server
+  when: ansible_pkg_mgr == "apt"
+
+- name: Install required packages (pacman)
+  pacman:
+    name: redis
+  when: ansible_pkg_mgr == "pacman"
 
 - name: Copy Redis conf 
   template:
@@ -15,3 +22,18 @@
     owner: root
     group: root
     mode: 0600
+  when: ansible_pkg_mgr == "apt"
+
+- name: Copy Redis conf 
+  template:
+    src: redis.conf.j2
+    dest: /etc/redis.conf
+    owner: root
+    group: root
+    mode: 0600
+  when: ansible_pkg_mgr == "pacman"
+
+- name: Restart redis service
+  service:
+    name: redis
+    state: restarted

@@ -1,5 +1,7 @@
+# {{ansible_managed}}
 # Redis configuration file example.
 #
+
 # Note that in order to read the configuration file, Redis must be
 # started with the file path as first argument:
 #
@@ -1084,8 +1086,6 @@ activerehashing {{ redis_activerehashing }}
 # subscribers and slaves receive data in a push fashion.
 #
 # Both the hard or the soft limit can be disabled by setting them to zero.
-client-output-buffer-limit {{ redis_client_output_buffer_limit }}
-client-output-buffer-limit {{ redis_client_output_buffer_limit }}
 client-output-buffer-limit {{ redis_client_output_buffer_limit }}
 
 # Redis calls an internal function to perform many background tasks, like
