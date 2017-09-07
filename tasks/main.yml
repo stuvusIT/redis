@@ -10,6 +10,12 @@
     name: redis-server
   when: ansible_pkg_mgr == "apt"
 
+- name: Update repositories cache (pacman)
+  pacman:
+    update_cache: yes
+  changed_when: false
+  when: ansible_pkg_mgr == "pacman"
+
 - name: Install required packages (pacman)
   pacman:
     name: redis
@@ -33,8 +39,8 @@
     mode: 0600
   when: ansible_pkg_mgr == "pacman"
 
-- name: Restart redis service
-  service:
+- name: Restart redis servic
+e  service:
     name: redis
     state: restarted
     enabled: yes
