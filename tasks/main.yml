@@ -29,6 +29,7 @@
     group: root
     mode: 0600
   when: ansible_pkg_mgr == "apt"
+  notfiy: Restart redis
 
 - name: Copy Redis conf 
   template:
@@ -38,9 +39,4 @@
     group: root
     mode: 0600
   when: ansible_pkg_mgr == "pacman"
-
-- name: Restart redis servic
-e  service:
-    name: redis
-    state: restarted
-    enabled: yes
+  notfiy: Restart redis
