@@ -1,2 +1,42 @@
 ---
-# tasks file for .
+- name: Update Cache
+  apt:
+    update_chache: yes
+  changed_when: false
+  when: ansible_pkg_mgr == "apt"
+
+- name: Install redis-server
+  apt:
+    name: redis-server
+  when: ansible_pkg_mgr == "apt"
+
+- name: Update repositories cache (pacman)
+  pacman:
+    update_cache: yes
+  changed_when: false
+  when: ansible_pkg_mgr == "pacman"
+
+- name: Install required packages (pacman)
+  pacman:
+    name: redis
+  when: ansible_pkg_mgr == "pacman"
+
+- name: Copy Redis conf 
+  template:
+    src: redis.conf.j2
+    dest: /etc/redis/redis.conf
+    owner: root
+    group: root
+    mode: 0600
+  when: ansible_pkg_mgr == "apt"
+  notfiy: Restart redis
+
+- name: Copy Redis conf 
+  template:
+    src: redis.conf.j2
+    dest: /etc/redis.conf
+    owner: root
+    group: root
+    mode: 0600
+  when: ansible_pkg_mgr == "pacman"
+  notfiy: Restart redis
