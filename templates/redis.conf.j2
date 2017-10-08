@@ -36,10 +36,12 @@
 #
 # include /path/to/local.conf
 # include /path/to/other.conf
-
+{% if redis_include is defined %}
 {% for redis_include_opt in redis_include %}
 include {{ redis_include_opt }}
 {% endfor %}
+{% endif %}
+
 ################################## NETWORK #####################################
 
 # By default, if no "bind" configuration directive is specified, Redis listens
@@ -505,7 +507,7 @@ slave-announce-port {{redis_slave_announce_port}}
 # 150k passwords per second against a good box. This means that you should
 # use a very strong password otherwise it will be very easy to break.
 #
-# 
+#
 {% if redis_requirepass is defined %}
 requirepass {{ redis_requirepass }}
 {% endif %}
@@ -525,9 +527,12 @@ requirepass {{ redis_requirepass }}
 #
 # rename-command CONFIG ""
 #
+{% if redis_rename_command is defined %}
 {% for redis_rename_command_opt in redis_rename_command %}
 rename-command {{ redis_rename_command_opt }}
-{% endfor %}
+{% endfor %}  
+{% endif %}
+
 # Please note that changing the name of commands that are logged into the
 # AOF file or transmitted to slaves may cause problems.
 
