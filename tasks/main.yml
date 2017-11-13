@@ -1,7 +1,11 @@
 ---
+- name: Update Cache (apt)
+  apt:
+    update_chache: yes
+  changed_when: false
+  when: ansible_pkg_mgr == "apt"
 
-
-- name: Install redis-server
+- name: Install redis-server (apt)
   apt:
     name: redis-server
   when: ansible_pkg_mgr == "apt"
