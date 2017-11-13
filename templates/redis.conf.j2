@@ -36,10 +36,10 @@
 #
 # include /path/to/local.conf
 # include /path/to/other.conf
-
-{% for redis_include_opt in redis_include %}
+{% for redis_include_opt in redis_include| default([]) %}
 include {{ redis_include_opt }}
 {% endfor %}
+
 ################################## NETWORK #####################################
 
 # By default, if no "bind" configuration directive is specified, Redis listens
@@ -169,7 +169,7 @@ loglevel {{ redis_loglevel }}
 # Specify the log file name. Also the empty string can be used to force
 # Redis to log on the standard output. Note that if you use standard
 # output for logging but daemonize, logs will be sent to /dev/null
-logfile {{ redis_logfile }}
+logfile "{{ redis_logfile }}"
 
 # To enable logging to the system logger, just set 'syslog-enabled' to yes,
 # and optionally update the other syslog parameters to suit your needs.
@@ -505,7 +505,7 @@ slave-announce-port {{redis_slave_announce_port}}
 # 150k passwords per second against a good box. This means that you should
 # use a very strong password otherwise it will be very easy to break.
 #
-# 
+#
 {% if redis_requirepass is defined %}
 requirepass {{ redis_requirepass }}
 {% endif %}
@@ -525,9 +525,10 @@ requirepass {{ redis_requirepass }}
 #
 # rename-command CONFIG ""
 #
-{% for redis_rename_command_opt in redis_rename_command %}
+{% for redis_rename_command_opt in redis_rename_command | default([]) %}
 rename-command {{ redis_rename_command_opt }}
 {% endfor %}
+
 # Please note that changing the name of commands that are logged into the
 # AOF file or transmitted to slaves may cause problems.
 
