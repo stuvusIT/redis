@@ -1089,7 +1089,7 @@ activerehashing {{ redis_activerehashing }}
 # Both the hard or the soft limit can be disabled by setting them to zero.
 {% for limit in redis_client_output_buffer_limit %}
 client-output-buffer-limit {{ limit }}
-{% endfor %}}
+{% endfor %}
 
 # Redis calls an internal function to perform many background tasks, like
 # closing connections of clients in timeout, purging expired keys that are

@@ -1,7 +1,7 @@
 ---
 - name: Update Cache (apt)
   apt:
-    update_chache: yes
+    update_cache: yes
   changed_when: false
   when: ansible_pkg_mgr == "apt"
 
