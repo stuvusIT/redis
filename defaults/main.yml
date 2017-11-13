@@ -54,8 +54,9 @@ redis_zset_max_ziplist_entries: 128
 redis_zset_max_ziplist_value: 64
 redis_hll_sparse_max_bytes: 3000
 redis_activerehashing: "yes"
-redis_client_output_buffer_limit: normal 0 0 0
-redis_client_output_buffer_limit: slave 256mb 64mb 60
-redis_client_output_buffer_limit: pubsub 32mb 8mb 60
+redis_client_output_buffer_limit: 
+  - "normal 0 0 0"
+  - "slave 256mb 64mb 60"
+  - "pubsub 32mb 8mb 60"
 redis_hz: 10
 redis_aof_rewrite_incremental_fsync: "yes"

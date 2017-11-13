@@ -1087,7 +1087,9 @@ activerehashing {{ redis_activerehashing }}
 # subscribers and slaves receive data in a push fashion.
 #
 # Both the hard or the soft limit can be disabled by setting them to zero.
-client-output-buffer-limit {{ redis_client_output_buffer_limit }}
+{% for limit in redis_client_output_buffer_limit %}
+client-output-buffer-limit {{ limit }}
+{% endfor %}}
 
 # Redis calls an internal function to perform many background tasks, like
 # closing connections of clients in timeout, purging expired keys that are
