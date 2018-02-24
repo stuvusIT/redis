@@ -18,6 +18,7 @@ redis_pidfile: /var/run/redis/redis-server.pid
 redis_loglevel: notice
 redis_logfile: ""
 redis_databases: 16
+redis_cluster_enabled: false
 redis_save: 
     - "900 1"
     - "300 10"
