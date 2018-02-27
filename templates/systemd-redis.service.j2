@@ -35,7 +35,7 @@ ReadWriteDirectories=-/var/log/redis
 ReadWriteDirectories=-/var/run/redis
 CapabilityBoundingSet=~CAP_SYS_PTRACE
 
-{% if redis_cluster_enabled %}
+{% if redis_cluster_enabled | bool %}
 # redis-server can write to its own config file when in cluster mode so we
 # permit writing there by default. If you are not using this feature, it is
 # recommended that you replace the following lines with "ProtectSystem=full".

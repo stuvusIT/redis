@@ -2,6 +2,7 @@
 - name: Add redis ppa
   apt_repository:
     repo: "ppa:chris-lea/redis-server"
+  when: ansible_pkg_mgr == "apt"
 
 - name: Update Cache (apt)
   apt:
@@ -30,6 +31,11 @@
     src: systemd-redis.service.j2
     dest: /etc/systemd/system/redis.service
   notify: Reload systemd daemon
+
+- name: Remove redis-server.service
+  file:
+    state: absent
+    path: /lib/systemd/system/redis-server.service
 
 - name: Copy Redis conf 
   template:
