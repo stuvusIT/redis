@@ -4,7 +4,7 @@
     repo: "ppa:chris-lea/redis-server"
   when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Ubuntu'
 
-- name: Add an gpg key
+- name: Add a gpg key
   apt_key:
     url: https://www.dotdeb.org/dotdeb.gpg
   when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Debian'
