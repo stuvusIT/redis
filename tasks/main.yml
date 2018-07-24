@@ -2,7 +2,17 @@
 - name: Add redis ppa
   apt_repository:
     repo: "ppa:chris-lea/redis-server"
-  when: ansible_pkg_mgr == "apt"
+  when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Ubuntu'
+
+- name: Add an gpg key
+  apt_key:
+    url: https://www.dotdeb.org/dotdeb.gpg
+  when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Debian'
+
+- name: Add repositoy for current redis packages
+  apt_repository:
+    repo: "deb http://ftp.hosteurope.de/mirror/packages.dotdeb.org/ stable all"
+  when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Debian'
 
 - name: Update Cache (apt)
   apt:
