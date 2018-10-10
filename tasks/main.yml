@@ -11,7 +11,7 @@
 
 - name: Add repositoy for current redis packages
   apt_repository:
-    repo: "deb http://ftp.hosteurope.de/mirror/packages.dotdeb.org/ stable all"
+    repo: "deb http://ftp.hosteurope.de/mirror/packages.dotdeb.org/ {{ ansible_distribution_release }} all"
   when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Debian'
 
 - name: Update Cache (apt)
