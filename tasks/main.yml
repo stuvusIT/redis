@@ -1,35 +1,25 @@
 ---
-- name: Add redis ppa
-  apt_repository:
-    repo: "ppa:chris-lea/redis-server"
-  when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Ubuntu'
-
-- name: Add a gpg key
+- name: Add redis GPG key for Debian
   apt_key:
     url: https://www.dotdeb.org/dotdeb.gpg
   when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Debian'
 
-- name: Add repositoy for current redis packages
+- name: Add redis repository for Debian
   apt_repository:
     repo: "deb http://ftp.hosteurope.de/mirror/packages.dotdeb.org/ {{ ansible_distribution_release }} all"
+    update_cache: true
   when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Debian'
 
-- name: Update Cache (apt)
-  apt:
-    update_cache: yes
-  changed_when: false
-  when: ansible_pkg_mgr == "apt"
+- name: Add redis repository for Ubuntu
+  apt_repository:
+    repo: "ppa:chris-lea/redis-server"
+    update_cache: true
+  when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Ubuntu'
 
 - name: Install redis-server (apt)
   apt:
     name: redis-server
   when: ansible_pkg_mgr == "apt"
-
-- name: Update repositories cache (pacman)
-  pacman:
-    update_cache: yes
-  changed_when: false
-  when: ansible_pkg_mgr == "pacman"
 
 - name: Install required packages (pacman)
   pacman:
@@ -57,7 +47,7 @@
   when: ansible_pkg_mgr == "apt"
   notify: Restart redis
 
-- name: Copy Redis conf 
+- name: Copy Redis conf
   template:
     src: redis.conf.j2
     dest: /etc/redis.conf

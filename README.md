@@ -5,8 +5,7 @@ This role installs and configures a redis server. It allows to set all configura
 
 ## Requirements
 
-An dpkg- or pacman-based Linux distribution.
-
+A dpkg- or pacman-based Linux distribution.
 
 ## Role Variables
 
