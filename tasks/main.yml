@@ -14,22 +14,10 @@
     repo: "deb http://ftp.hosteurope.de/mirror/packages.dotdeb.org/ {{ ansible_distribution_release }} all"
   when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Debian'
 
-- name: Update Cache (apt)
-  apt:
-    update_cache: yes
-  changed_when: false
-  when: ansible_pkg_mgr == "apt"
-
 - name: Install redis-server (apt)
   apt:
     name: redis-server
   when: ansible_pkg_mgr == "apt"
-
-- name: Update repositories cache (pacman)
-  pacman:
-    update_cache: yes
-  changed_when: false
-  when: ansible_pkg_mgr == "pacman"
 
 - name: Install required packages (pacman)
   pacman:
