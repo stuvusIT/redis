@@ -14,15 +14,20 @@
     repo: "deb http://ftp.hosteurope.de/mirror/packages.dotdeb.org/ {{ ansible_distribution_release }} all"
   when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Debian'
 
+- name: Copy Redis conf 
+  template:
+    src: redis.conf.j2
+    dest: /etc/redis/redis.conf
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_pkg_mgr == "apt"
+  notify: Restart redis
+
 - name: Install redis-server (apt)
   apt:
     name: redis-server
   when: ansible_pkg_mgr == "apt"
-
-- name: Install required packages (pacman)
-  pacman:
-    name: redis
-  when: ansible_pkg_mgr == "pacman"
 
 - name: Install systemd service file
   template:
@@ -34,23 +39,3 @@
   file:
     state: absent
     path: /lib/systemd/system/redis-server.service
-
-- name: Copy Redis conf 
-  template:
-    src: redis.conf.j2
-    dest: /etc/redis/redis.conf
-    owner: root
-    group: root
-    mode: 0644
-  when: ansible_pkg_mgr == "apt"
-  notify: Restart redis
-
-- name: Copy Redis conf 
-  template:
-    src: redis.conf.j2
-    dest: /etc/redis.conf
-    owner: root
-    group: root
-    mode: 0644
-  when: ansible_pkg_mgr == "pacman"
-  notify: Restart redis
