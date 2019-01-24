@@ -5,13 +5,16 @@ This role installs and configures a redis server. It allows to set all configura
 
 ## Requirements
 
-An apt- or pacman-based Linux distribution.
+An apt-based Linux distribution.
 
 
 ## Role Variables
 
-This role seriously has a ton of variables. Instead of copying the defaults file here, look it up there. All variables from redis.conf are called exactly like they are called in the file but with redis_ prepended.
-The 3 commands below are usable multiple times so theres an example syntax on how to do that.
+This role seriously has a ton of variables.
+Instead of copying the defaults file here, look it up there.
+All variables from redis.conf are called exactly like they are called in the file but with redis_ prepended.
+The three commands below are usable multiple times so theres an example syntax on how to do that.
+
 ```yml
 redis_save:
     - "900 1"

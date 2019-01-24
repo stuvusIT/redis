@@ -16,10 +16,6 @@ galaxy_info:
       versions:
       - jessie
       - stretch
-    - name: ArchLinux
-      versions:
-      - all
-      - any
 
   galaxy_tags:
     - stuvus
