@@ -14,6 +14,14 @@
     repo: "deb http://ftp.hosteurope.de/mirror/packages.dotdeb.org/ {{ ansible_distribution_release }} all"
   when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Debian'
 
+- name: Create Redis Directory
+  file:
+    path: /etc/redis
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
 - name: Copy Redis conf 
   template:
     src: redis.conf.j2
