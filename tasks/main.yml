@@ -41,6 +41,7 @@
   template:
     src: systemd-redis.service.j2
     dest: /lib/systemd/system/redis.service
+    validate: systemd-analyze verify %s
   notify: Reload systemd daemon
 
 - name: Remove redis-server.service
