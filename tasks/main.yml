@@ -22,7 +22,7 @@
     group: root
     mode: 0755
 
-- name: Copy Redis conf 
+- name: Copy Redis conf
   template:
     src: redis.conf.j2
     dest: /etc/redis/redis.conf
