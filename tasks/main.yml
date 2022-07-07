@@ -7,12 +7,12 @@
 - name: Add a gpg key
   apt_key:
     url: https://www.dotdeb.org/dotdeb.gpg
-  when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Debian'
+  when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Debian' and ansible_distribution_major_version is version('9', '<=')
 
 - name: Add repositoy for current redis packages
   apt_repository:
     repo: "deb http://ftp.hosteurope.de/mirror/packages.dotdeb.org/ {{ ansible_distribution_release }} all"
-  when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Debian'
+  when: ansible_pkg_mgr == "apt" and ansible_distribution == 'Debian' and ansible_distribution_major_version is version('9', '<=')
 
 - name: Create Redis Directory
   file:
